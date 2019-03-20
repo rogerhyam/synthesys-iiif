@@ -45,9 +45,7 @@ CETAF Stable Identifiers have three levels of implemenation
 1. The URIs are well behaved semantic web URIs. This means that they will always return a "HTTP 303 See Other" redirect response to an appropriate URI. The URI redirected to will depend on content negotiation done by the server based on the accept header in the request. This comes down to a default redirect to a human readable web page or to XML encoded RDF metadata about the specimen if the "Accept: application/rdf+xml" header is present in the request. Level 2 does not specify the content of that metadata.
 1. The RDF metadata contains application specific data conforming to some other standard. Currently we are working with the [CETAF Specimen Preview Profile (CSPP)](https://cetafidentifiers.biowikifarm.net/wiki/CSPP) as a common minimum set of properties - all of which are based on terms from other vocabularies.
 
-
-
-This is described in the [CETAF URI Tester documentation](http://herbal.rbge.info/md.php?q=documentation).
+CETAF Stable Identifiers are described further in the [CETAF URI Tester documentation](http://herbal.rbge.info/md.php?q=documentation).
 
 ## Implementation of IIIF APIs
 
@@ -55,13 +53,38 @@ Version 3 of the API is still in Alpha but more or less stable and is expected t
 
 ## Linking from RDF to IIIF Manifests
 
+Add a dc:relation to the RDF for the specimen. Here is an example:
+
+```xml
+<dc:relation>
+	<rdf:Description  rdf:about="http://iiif.rbge.info/iiif/E00421509" >
+		<dc:identifier rdf:resource="http://iiif.rbge.info/iiif/E00421509" />
+		<dc:type rdf:resource="http://iiif.io/api/presentation/3#Manifest" />
+		<dc:subject rdf:resource="https://data.rbge.org.uk/herb/E00421509" />
+		<dc:format>application/ld+json</dc:format>
+		<dc:description xml:lang="en">A IIIF resource for this specimen.</dc:description>
+		<dc:created>2011-08-22T11:54:43Z</dc:created>
+	</rdf:Description>
+</dc:relation>
+```
+
+Explanation to follow
+
+This needs to be confirmed by discussions with the IIIF community.
+
 ## Linking from IIIF Manifests to Specimens
 
-## Recommended Labels in IIIF Manifests
+
+
+
+## Recommended labels in IIIF Manifests
 
 ## Recommended display in institional catalogues
 
+## Other possible approaches
 
+### Using content negotiation to redirect from CETAF ID to IIIF manifest
 
+It would be possible to link from 	
 
 

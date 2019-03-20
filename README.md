@@ -1,6 +1,6 @@
 # Synthesys+ Task 4.3 International Image Interoperability Framework (IIIF)
 
-This repository is to help in deploying [IIIF](https://iiif.io/) in natural history collections as part of the [Synthesys+](http://www.synthesys.info/home.html) project funded by the European Commission. It consists of this document, which sets out recommendations for how to implement IIIF in concert with CETAF stable identifiers, plus some example files.
+This repository is to help in deploying [IIIF](https://iiif.io/) in natural history collections as part of the [Synthesys+](http://www.synthesys.info/home.html) project funded by the European Commission. It consists of this document, which sets out recommendations for how to implement IIIF in concert with CETAF stable identifiers, plus some example files. The target audience are engineers and technicians implementing IIIF on the collections although it may be informative to others.
 
 When a CETAF stable identifier links to a specimen record that is accompanied by a high-resolution image (or images) we want to be able to view that image in a way that is independent of the hosting institution and the technologies they use. This will enable applications to be built that can browse and combine specimen images across multiple institutions in real time, creating a truly virtual collection from the user’s perspective. IIIF is a set of API specifications used widely in the libraries and archives community for this purpose. It enables the combining of multiple views of single objects or building composite views of objects from images stored in different locations.
 
@@ -12,7 +12,7 @@ There are three subtasks to Task 4.3
 1. __Integration of CETAF Identifiers into IIIF browsing__ examines the how we smoothly link between CETAF URIs and IIIF manifests to give a smooth user experience.
 1. __Growing the network__ looks at how we spread the word to other collections beyond the project
 
-__This document is working document. It will become more stable as time passes and as implementations are built based on what is written here.__ Issues & suggestions please contact the task leader [Roger Hyam](mailto:r.hyam@rbge.org.uk) or if you want to add significant material issue a pull request.
+__This is a working document. It will become more stable as time passes and as implementations are built based on what is written here.__ Issues & suggestions please contact the task leader [Roger Hyam](mailto:r.hyam@rbge.org.uk) or if you want to add significant material issue a pull request.
 
 ## Initial implementations 
 
@@ -30,8 +30,8 @@ Subtask 4.3.1 recognises that it is important to get example implementations run
 
 Further details are given in sections below.
 
-1. Institutions must implement CETAF Stable Identifiers for their specimens at atleast level 2 - with a 303 redirect to RDF metadata about the specimen. This is described in the [CETAF URI Tester documentation](http://herbal.rbge.info/md.php?q=documentation).
-1. Institutions must implement IIIF [Image and Presentation APIs version 3](https://iiif.io/api/) or higher. (Version 3 of the API is still in Alpha but more or less stable and is expected to be fully released in 2019.)
+1. Institutions must implement CETAF Stable Identifiers for their specimens at level 2 or above - with a 303 redirect to RDF metadata about the specimen.
+1. Institutions must implement IIIF [Image and Presentation APIs version 3](https://iiif.io/api/) or higher.
 1. RDF returned for specimens should contain a link to a IIIF Manifest file for the image for that specimen.
 1. The IIIF Manifest file should contain a link to the CETAF URI for the specimen.
 1. It is recommended the IIIF Manifest contains some of the key Darwin Core metadata fields as name-value pairs for labels.
@@ -39,7 +39,19 @@ Further details are given in sections below.
 
 ## Implementation of CETAF Stable Identifiers
 
+CETAF Stable Identifiers have three levels of implemenation
+
+1. A simple HTTP(S) URI for each object in the collection that the institution commits to maintaining for the forseable future.
+1. The URIs are well behaved semantic web URIs. This means that they will always return a "HTTP 303 See Other" redirect response to an appropriate URI. The URI redirected to will depend on content negotiation done by the server based on the accept header in the request. This comes down to a default redirect to a human readable web page or to XML encoded RDF metadata about the specimen if the "Accept: application/rdf+xml" header is present in the request. Level 2 does not specify the content of that metadata.
+1. The RDF metadata contains application specific data conforming to some other standard. Currently we are working with the [CETAF Specimen Preview Profile (CSPP)](https://cetafidentifiers.biowikifarm.net/wiki/CSPP) as a common minimum set of properties - all of which are based on terms from other vocabularies.
+
+
+
+This is described in the [CETAF URI Tester documentation](http://herbal.rbge.info/md.php?q=documentation).
+
 ## Implementation of IIIF APIs
+
+Version 3 of the API is still in Alpha but more or less stable and is expected to be fully released in 2019.
 
 ## Linking from RDF to IIIF Manifests
 

@@ -74,8 +74,22 @@ This needs to be confirmed by discussions with the IIIF community.
 
 ## Linking from IIIF Manifests to Specimens
 
+Use the seeAlso property in the Manifest to link to the specimen.
 
+```json
+{
+  "seeAlso": [
+    {
+      "id": "https://data.rbge.org.uk/herb/E00421509",
+      "type": "Dataset",
+      "format": "application/rdf+xml",
+      "profile": "https://example.org/profiles/bibliographic"
+    }
+  ]
+}
+```
 
+__ This needs to be confirmed with the 
 
 ## Recommended labels in IIIF Manifests
 

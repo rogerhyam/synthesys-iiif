@@ -93,6 +93,8 @@ __ This needs to be confirmed with the
 
 ## Recommended labels in IIIF Manifests
 
+These are to be defined but are likely to include the main Darwin Core fields of Family, Genus, specificEpithet etc.
+
 ## Recommended display in institional catalogues
 
 ## Other possible approaches
